@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Интерактивный квиз для Темы на знание артиста Хаски: 10 вопросов с ростом сложности и мгновенной обратной связью."
+    />
+    <title>Тема x Хаски | Интерактивный квиз</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="quiz-shell">
+      <section class="hero-panel" aria-labelledby="page-title">
+        <div class="noise" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">10 вопросов. Один Тема. Никаких подсказок.</p>
+          <h1 id="page-title">Тема, насколько ты шаришь за Хаски?</h1>
+          <p class="hero-copy">
+            От простых фактов до деталей для уверенных слушателей. После каждого
+            ответа сразу будет видно, попал ты в цель или промахнулся мимо бита.
+          </p>
+
+          <div class="hero-actions">
+            <button class="primary-button" type="button" data-start>
+              Начать опрос
+            </button>
+          </div>
+
+          <div class="hero-stats" aria-label="Параметры опроса">
+            <div>
+              <span>10</span>
+              вопросов
+            </div>
+            <div>
+              <span>4</span>
+              уровня сложности
+            </div>
+            <div>
+              <span>1</span>
+              итоговый вердикт
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-panel" aria-live="polite">
+        <div class="quiz-card" data-screen="start">
+          <div class="card-topline">
+            <span class="badge">Персональный тест</span>
+            <span class="counter">Готов?</span>
+          </div>
+          <h2>Правила короткие</h2>
+          <p>
+            Выбирай один вариант ответа. После выбора появится правильный ответ
+            и короткое пояснение. В конце увидишь счет, звание и полный список
+            правильных ответов.
+          </p>
+          <button class="secondary-button" type="button" data-start>
+            Погнали
+          </button>
+        </div>
+
+        <div class="quiz-card is-hidden" data-screen="question">
+          <div class="progress-wrap" aria-label="Прогресс опроса">
+            <div class="progress-meta">
+              <span data-progress-text>Вопрос 1 из 10</span>
+              <span data-score-text>Счет: 0</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" data-progress-fill></div>
+            </div>
+          </div>
+
+          <div class="question-head">
+            <span class="difficulty" data-difficulty>Легкий разогрев</span>
+            <span class="question-number" data-question-number>01</span>
+          </div>
+
+          <h2 data-question-title>Вопрос появится здесь</h2>
+          <div class="answers" data-answers></div>
+
+          <div class="feedback is-hidden" data-feedback>
+            <p class="feedback-title" data-feedback-title></p>
+            <p data-feedback-text></p>
+          </div>
+
+          <button class="secondary-button next-button is-hidden" type="button" data-next>
+            Дальше
+          </button>
+        </div>
+
+        <div class="quiz-card result-card is-hidden" data-screen="result">
+          <span class="badge">Финиш</span>
+          <h2 data-result-title>Результат</h2>
+          <p class="result-score" data-result-score></p>
+          <p class="result-copy" data-result-copy></p>
+
+          <div class="answer-review">
+            <h3>Правильные ответы</h3>
+            <ol data-review-list></ol>
+          </div>
+
+          <button class="primary-button" type="button" data-restart>
+            Пройти еще раз
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
