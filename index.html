@@ -45,7 +45,7 @@
         </div>
       </section>
 
-      <section class="quiz-panel" aria-live="polite">
+      <section class="quiz-panel" id="quiz" aria-live="polite">
         <div class="quiz-card" data-screen="start">
           <div class="card-topline">
             <span class="badge">Персональный тест</span>
@@ -81,14 +81,15 @@
           <h2 data-question-title>Вопрос появится здесь</h2>
           <div class="answers" data-answers></div>
 
-          <div class="feedback is-hidden" data-feedback>
-            <p class="feedback-title" data-feedback-title></p>
-            <p data-feedback-text></p>
+          <div class="feedback-dock is-hidden" data-feedback>
+            <div>
+              <p class="feedback-title" data-feedback-title></p>
+              <p data-feedback-text></p>
+            </div>
+            <button class="dock-next-button" type="button" data-next>
+              Дальше
+            </button>
           </div>
-
-          <button class="secondary-button next-button is-hidden" type="button" data-next>
-            Дальше
-          </button>
         </div>
 
         <div class="quiz-card result-card is-hidden" data-screen="result">

@@ -18,6 +18,7 @@
 
 html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -275,6 +276,7 @@ h3 {
 .quiz-panel {
   display: flex;
   align-items: center;
+  scroll-margin-top: 20px;
 }
 
 .quiz-card {
@@ -294,9 +296,13 @@ h3 {
 .card-topline,
 .progress-wrap,
 .question-head,
-.feedback,
 .answer-review {
   margin-bottom: 22px;
+}
+
+.progress-wrap {
+  display: grid;
+  gap: 10px;
 }
 
 .counter {
@@ -367,21 +373,31 @@ h3 {
   background: var(--red);
 }
 
-.feedback {
+.feedback-dock {
+  position: fixed;
+  z-index: 30;
+  right: max(20px, calc((100vw - 1180px) / 2));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  width: min(520px, calc(100vw - 40px));
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(245, 241, 234, 0.06);
+  background: rgba(23, 23, 29, 0.96);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(18px);
 }
 
-.feedback.is-correct {
+.feedback-dock.is-correct {
   border-color: rgba(79, 192, 131, 0.54);
-  background: rgba(79, 192, 131, 0.1);
+  background: rgba(21, 42, 31, 0.96);
 }
 
-.feedback.is-wrong {
+.feedback-dock.is-wrong {
   border-color: rgba(225, 79, 61, 0.54);
-  background: rgba(225, 79, 61, 0.1);
+  background: rgba(48, 24, 23, 0.96);
 }
 
 .feedback-title {
@@ -390,12 +406,31 @@ h3 {
   font-weight: 900;
 }
 
-.feedback p:last-child {
+.feedback-dock p:last-child {
   margin-bottom: 0;
 }
 
-.next-button {
-  width: 100%;
+.dock-next-button {
+  align-self: center;
+  min-height: 46px;
+  padding: 12px 16px;
+  border: 1px solid rgba(226, 180, 93, 0.42);
+  border-radius: 7px;
+  color: #160f0d;
+  background: var(--gold);
+  cursor: pointer;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.dock-next-button:hover,
+.dock-next-button:focus-visible {
+  outline: none;
+  background: #f0ca76;
+}
+
+.quiz-card.has-feedback {
+  padding-bottom: 132px;
 }
 
 .result-card {
@@ -462,15 +497,29 @@ h3 {
   .quiz-shell {
     grid-template-columns: 1fr;
     width: min(680px, calc(100% - 28px));
+    min-height: auto;
     padding: 14px 0 30px;
   }
 
   .hero-panel {
-    min-height: 68vh;
+    min-height: auto;
+    padding: 32px 28px;
   }
 
   .quiz-panel {
     align-items: stretch;
+  }
+
+  h1 {
+    font-size: clamp(2.7rem, 12vw, 4.5rem);
+  }
+
+  .hero-copy {
+    margin-bottom: 22px;
+  }
+
+  .hero-actions {
+    margin-bottom: 22px;
   }
 }
 
@@ -487,17 +536,53 @@ h3 {
   }
 
   .hero-panel {
-    min-height: 72svh;
-    padding: 28px 18px;
+    min-height: auto;
+    padding: 22px 18px;
   }
 
   .quiz-card {
-    padding: 22px 18px 28px;
+    padding: 20px 18px 24px;
+  }
+
+  .quiz-card.has-feedback {
+    padding-bottom: 178px;
   }
 
   .hero-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
+  }
+
+  .hero-stats div {
+    padding: 10px 8px;
+    font-size: 0.72rem;
+  }
+
+  .hero-stats span {
+    font-size: 1.35rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    margin-bottom: 12px;
+    font-size: clamp(2.2rem, 13vw, 3.25rem);
+  }
+
+  h2 {
+    font-size: 1.55rem;
+  }
+
+  .hero-copy {
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    margin-bottom: 16px;
   }
 
   .card-topline,
@@ -505,8 +590,48 @@ h3 {
     align-items: flex-start;
   }
 
+  .progress-wrap,
+  .question-head,
+  .answers {
+    margin-bottom: 14px;
+  }
+
+  .progress-meta {
+    margin-bottom: 4px;
+    font-size: 0.78rem;
+  }
+
   .question-number {
-    font-size: 3rem;
+    font-size: 2.45rem;
+  }
+
+  .answer-button {
+    min-height: 44px;
+    padding: 12px 13px;
+    font-size: 0.94rem;
+  }
+
+  .feedback-dock {
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: calc(100vw - 20px);
+    padding: 13px;
+  }
+
+  .feedback-dock p {
+    font-size: 0.9rem;
+    line-height: 1.42;
+  }
+
+  .feedback-title {
+    margin-bottom: 4px;
+  }
+
+  .dock-next-button {
+    width: 100%;
+    min-height: 44px;
   }
 
   .primary-button,

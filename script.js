@@ -99,6 +99,7 @@ const resultTitle = document.querySelector("[data-result-title]");
 const resultScore = document.querySelector("[data-result-score]");
 const resultCopy = document.querySelector("[data-result-copy]");
 const reviewList = document.querySelector("[data-review-list]");
+const quizPanel = document.querySelector("#quiz");
 
 let currentQuestion = 0;
 let score = 0;
@@ -116,6 +117,7 @@ function startQuiz() {
   selectedAnswers = [];
   showScreen("question");
   renderQuestion();
+  quizPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function renderQuestion() {
@@ -124,7 +126,7 @@ function renderQuestion() {
 
   feedback.classList.add("is-hidden");
   feedback.classList.remove("is-correct", "is-wrong");
-  nextButton.classList.add("is-hidden");
+  screens.question.classList.remove("has-feedback");
   answersElement.innerHTML = "";
 
   questionTitle.textContent = item.question;
@@ -168,11 +170,12 @@ function selectAnswer(answerIndex) {
   feedback.classList.toggle("is-correct", isCorrect);
   feedback.classList.toggle("is-wrong", !isCorrect);
   feedback.classList.remove("is-hidden");
+  screens.question.classList.add("has-feedback");
 
   scoreText.textContent = `Счет: ${score}`;
-  nextButton.textContent =
+  const nextLabel =
     currentQuestion === questions.length - 1 ? "Показать результат" : "Дальше";
-  nextButton.classList.remove("is-hidden");
+  nextButton.textContent = nextLabel;
 }
 
 function goNext() {
@@ -184,6 +187,7 @@ function goNext() {
   }
 
   renderQuestion();
+  quizPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function getResult() {
